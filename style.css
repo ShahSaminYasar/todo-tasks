@@ -1,0 +1,224 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* HEADER */
+#header {
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  height: 80px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  z-index: 9;
+}
+
+#header .container h1 {
+  font-size: 32px;
+  font-weight: 300;
+  text-align: center;
+}
+
+/* MAIN */
+#main {
+  background: aliceblue;
+  min-height: 73vh;
+}
+
+#main::before {
+  display: none;
+}
+
+#main.active::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to top,
+    rgba(153, 122, 122, 0.27),
+    rgba(153, 122, 122, 0.27)
+  );
+  backdrop-filter: blur(4px);
+}
+
+#todo_form {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 0px;
+  gap: 5px;
+}
+
+#todo_form input {
+  padding: 5px 10px;
+  width: 300px;
+  border: none;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+  border-radius: 5px;
+  outline: none;
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+}
+
+#todo_form button {
+  padding: 4px 10px;
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  background: rgb(231, 255, 227);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+  color: rgb(38, 182, 38);
+  border-radius: 5px;
+  border: 2px solid white;
+  outline: none;
+  cursor: pointer;
+}
+
+#todo_form button:hover {
+  background: transparent;
+  color: rgb(19, 148, 19);
+  border: 2px solid rgb(19, 148, 19);
+}
+
+.todo_tasks {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 13px;
+}
+
+.todo_task {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.todo_task p {
+  font-size: 18px;
+  background: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+  min-width: 300px;
+}
+
+.todo_task button {
+  font-size: 23px;
+  background: rgb(255, 60, 0);
+  border: 2px solid transparent;
+  outline: none;
+  padding: 5px 7px;
+  border-radius: 5px;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.907);
+}
+
+.todo_task button:hover {
+  background: transparent;
+  border: 2px solid rgb(255, 60, 0);
+  color: rgb(255, 60, 0);
+}
+
+.confirmation_modal {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 5px;
+  width: 500px;
+  padding: 50px 30px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  backdrop-filter: blur(7px);
+}
+
+.confirmation_modal.active {
+  display: block;
+}
+
+.confirmation_modal span {
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.75);
+  text-align: center;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.button_groups {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.button_groups button {
+  padding: 7px 14px;
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+  border: 2px solid rgb(255, 60, 0);
+  border-radius: 5px;
+  color: rgb(255, 60, 0);
+  cursor: pointer;
+  background: transparent;
+}
+
+.button_groups button:nth-child(1) {
+  background: rgb(255, 60, 0);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.button_groups button:nth-child(1):hover {
+  color: rgb(255, 185, 185);
+}
+
+/* Footer */
+#footer {
+  padding: 40px 10px;
+  background: #fff;
+  display: grid;
+  place-items: center;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.17);
+  font-size: 18px;
+}
+
+#footer a {
+  color: rgb(255, 62, 158);
+  text-decoration: none;
+}
+
+#footer a:hover {
+  animation: footerLinkText 3s linear 0s infinite forwards;
+}
+
+@keyframes footerLinkText {
+  0% {
+    color: rgb(255, 62, 158);
+  }
+  50% {
+    color: rgb(0, 68, 255);
+  }
+  70% {
+    color: rgb(255, 62, 158);
+  }
+}
