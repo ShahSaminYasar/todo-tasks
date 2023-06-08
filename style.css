@@ -8,6 +8,7 @@
 
 body {
   font-family: "Poppins", sans-serif;
+  background: aliceblue;
 }
 
 .container {
@@ -24,6 +25,7 @@ body {
   display: flex;
   align-items: center;
   z-index: 9;
+  padding: 0px 10px;
 }
 
 #header .container h1 {
@@ -35,7 +37,8 @@ body {
 /* MAIN */
 #main {
   background: aliceblue;
-  min-height: 73vh;
+  height: 75vh;
+  padding: 0px 10px;
 }
 
 #main::before {
@@ -58,7 +61,12 @@ body {
   backdrop-filter: blur(4px);
 }
 
+#main .container {
+  height: 100%;
+}
+
 #todo_form {
+  height: 20%;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -98,11 +106,13 @@ body {
 }
 
 .todo_tasks {
+  height: 80%;
+  overflow-y: scroll;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   gap: 13px;
+  /* padding-bottom: 30px; */
 }
 
 .todo_task {
@@ -194,6 +204,7 @@ body {
 
 /* Footer */
 #footer {
+  margin-top: 30px;
   padding: 40px 10px;
   background: #fff;
   display: grid;
@@ -220,5 +231,54 @@ body {
   }
   70% {
     color: rgb(255, 62, 158);
+  }
+}
+
+/* Responsiveness - Media Queries */
+@media screen and (max-width: 550px) {
+  .confirmation_modal {
+    width: 350px;
+  }
+  .confirmation_modal span {
+    font-size: 17px;
+  }
+  .button_groups button {
+    font-size: 17px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  #header {
+    height: 60px;
+  }
+  #header .container h1 {
+    font-size: 28px;
+  }
+  #todo_form input {
+    width: 65%;
+    font-size: 16px;
+  }
+  #todo_form button {
+    width: 35%;
+    font-size: 16px;
+  }
+  .todo_task p {
+    min-width: 250px;
+    font-size: 16px;
+  }
+  .todo_task button {
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .confirmation_modal {
+    width: 300px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .confirmation_modal {
+    width: 250px;
   }
 }
