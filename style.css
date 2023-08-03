@@ -1,0 +1,365 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1b1b1b;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ffffff;
+  border: 2px solid #1b1b1b;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Header */
+#header {
+  background: white;
+  min-height: 10vh;
+  border-bottom: 2px solid #1b1b1b;
+  display: flex;
+  align-items: center;
+}
+
+#header .container h1 {
+  font-size: 30px;
+  font-weight: 300;
+}
+
+/* Main */
+#main {
+  min-height: 70vh;
+  background: aliceblue;
+  padding: 30px 10px 10px;
+}
+
+#main .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.todo_input_form input {
+  padding: 7px 7px;
+  font-size: 20px;
+  border: 2px solid #1b1b1b;
+  border-radius: 5px;
+  background: white;
+  min-width: 350px;
+}
+
+.todo_input_form button {
+  padding: 5px 15px;
+  background: #1b1b1b;
+  border: 2px solid #1b1b1b;
+  color: white;
+  font-size: 22px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.todo_input_form button:hover {
+  color: lime;
+}
+
+.todo_tasks {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 15px;
+  margin-top: 30px;
+  max-height: 350px;
+  overflow-y: scroll;
+  padding: 0px 15px;
+}
+
+.todo_task {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.arrow_buttons {
+  width: 22px;
+}
+
+.arrow_buttons button {
+  background: #1b1b1b;
+  border: none;
+  outline: none;
+  padding: 1px;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  border: 2px solid transparent;
+}
+
+.arrow_buttons button:hover {
+  background: transparent;
+  color: #1b1b1b;
+  border: 2px solid #1b1b1b;
+}
+
+.arrow_buttons button i {
+  font-size: 15px;
+}
+
+.todo_task span {
+  background: #ffffff;
+  padding: 5px;
+  border: 2px solid #1b1b1b;
+  border-radius: 5px;
+  font-size: 18px;
+  min-width: 300px;
+  min-height: 46px;
+  display: flex;
+  align-items: center;
+  margin-left: 5px;
+  margin-top: 2px;
+  margin-right: 5px;
+}
+
+.todo_task .buttons_group {
+  margin-top: 2px;
+}
+
+.todo_task .buttons_group button {
+  padding: 10px;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  background: #1b1b1b;
+  color: white;
+  cursor: pointer;
+}
+
+.todo_task .buttons_group button i {
+  font-size: 22px;
+}
+
+.todo_task .buttons_group button:nth-child(1):hover {
+  background: transparent;
+  border: 2px solid tomato;
+  color: tomato;
+}
+
+.todo_task .buttons_group button:nth-child(2):hover {
+  background: transparent;
+  border: 2px solid royalblue;
+  color: royalblue;
+}
+
+/* Modals */
+.modal_container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(3px);
+  place-items: center;
+  display: grid;
+  padding: 10px;
+}
+
+.modal {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 10px;
+  background: white;
+  border: 2px solid #1b1b1b;
+  padding: 50px 25px;
+}
+
+.modal span {
+  display: block;
+  font-size: 25px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.modal .buttons_group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.modal .buttons_group button {
+  padding: 5px 10px;
+  border: 2px solid #1b1b1b;
+  background: #1b1b1b;
+  font-size: 20px;
+  color: red;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal .buttons_group button:nth-child(2) {
+  background: transparent;
+  color: #1b1b1b;
+}
+
+.modal form {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+.modal form input {
+  font-size: 18px;
+  padding: 5px;
+  background: white;
+  border: 2px solid #1b1b1b;
+  outline: none;
+  border-radius: 5px;
+  width: 100%;
+}
+
+#edit_modal .modal .buttons_group {
+  width: 100%;
+  justify-content: flex-end;
+}
+
+#edit_modal .modal .buttons_group button {
+  color: white;
+}
+
+#edit_modal .modal .buttons_group button:nth-child(2) {
+  color: #1b1b1b;
+}
+
+#delete_modal,
+#edit_modal {
+  display: none;
+}
+
+/* Footer */
+#footer {
+  min-height: 20vh;
+  border-top: 2px solid #1b1b1b;
+  display: flex;
+  align-items: center;
+  padding: 0px 10px;
+  text-align: center;
+  font-size: 18px;
+}
+
+#footer a {
+  color: royalblue;
+  text-decoration: none;
+}
+
+/* Media Queries */
+@media screen and (max-width: 500px) {
+  .todo_input_form {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .todo_input_form input {
+    font-size: 17px;
+    padding: 10px 7px;
+    min-width: 80%;
+  }
+
+  .todo_input_form button {
+    padding: 7px 10px;
+  }
+
+  .todo_task span {
+    font-size: 16px;
+    min-width: 265px;
+  }
+
+  .todo_task .buttons_group {
+    margin-top: 1px;
+  }
+
+  .todo_task .buttons_group button {
+    padding: 11px 5px;
+  }
+
+  .todo_task .buttons_group button i {
+    font-size: 18px;
+  }
+
+  .arrow_buttons {
+    width: 18px;
+  }
+
+  .arrow_buttons button i {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .todo_tasks {
+    width: 100%;
+  }
+
+  .todo_task {
+    width: 100%;
+  }
+
+  .todo_task .arrow_buttons {
+    width: 5%;
+  }
+
+  .todo_task span {
+    min-width: 40px;
+    width: 75%;
+  }
+
+  .todo_task .buttons_group {
+    width: 20%;
+  }
+
+  .todo_task .buttons_group button {
+    width: 45%;
+    display: inline-grid;
+    place-items: center;
+    padding: 11px 0px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  #main {
+    padding: 25px 5px;
+  }
+
+  .todo_tasks {
+    padding: 0px 5px;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  #footer {
+    font-size: 16px;
+  }
+}

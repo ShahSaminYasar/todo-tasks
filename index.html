@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TODO Tasks App</title>
+    <!-- Link FontAwesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Link Custom Stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="header">
+      <div class="container">
+        <h1>TODO Tasks</h1>
+      </div>
+    </header>
+
+    <!-- Main -->
+    <main id="main">
+      <div class="container">
+        <form class="todo_input_form">
+          <input type="text" placeholder="Write a TODO Task" id="todo_input" />
+          <button type="submit" onclick="addTask(event)">
+            <i class="fa-regular fa-clipboard"></i>
+          </button>
+        </form>
+
+        <div class="todo_tasks"></div>
+      </div>
+
+      <!-- Modals -->
+      <!-- Delete Modal -->
+      <div class="modal_container" id="delete_modal">
+        <div class="modal">
+          <span>Are you sure to delete the task?</span>
+          <div class="buttons_group">
+            <button onclick="deleteTask()">Yes</button>
+            <button onclick="cancelDelete()">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Edit Modal -->
+      <div class="modal_container" id="edit_modal">
+        <div class="modal">
+          <span>Edit Task</span>
+          <form>
+            <input type="text" placeholder="Edit task" id="edit_input" />
+            <div class="buttons_group">
+              <button type="submit" onclick="editTask(event)">Update</button>
+              <button onclick="cancelEdit(event)">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer id="footer">
+      <div class="container">
+        Copyright 2023 &copy;
+        <a href="https://shahsaminyasar.github.io/portfolio" target="_blank"
+          >SHAH SAMIN YASAR</a
+        >
+      </div>
+    </footer>
+
+    <!-- Link JS File -->
+    <script src="script.js"></script>
+  </body>
+</html>
