@@ -47,7 +47,7 @@ body {
 /* Header */
 #header {
   background: var(--white);
-  height: 10vh;
+  min-height: 10vh;
   border-bottom: 2px solid var(--primary);
   display: grid;
   place-items: center;
@@ -337,7 +337,7 @@ body {
   }
 
   #header {
-    height: 7vh;
+    min-height: 7vh;
   }
 
   #main {
