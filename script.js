@@ -1,119 +1,122 @@
 const todoInput = document.getElementById("todo_input");
-const todoTasks = document.querySelector(".todo_tasks");
-const deleteModal = document.querySelector("#delete_modal");
-const editModal = document.querySelector("#edit_modal");
+const todoTasksContainer = document.getElementById("todo_tasks_container");
+const modalContainer = document.getElementById("modals_container");
+const editModal = document.getElementById("edit_modal");
+const deleteModal = document.getElementById("delete_modal");
 const editInput = document.getElementById("edit_input");
 
-// Tasks Array
-var todoTasksArray = [];
+let todoTasksArray = JSON.parse(localStorage.getItem("todo-tasks"));
 
-// Variables
-var indexToBeDeleted;
-var indexToBeEdited;
+todoTasksArray == null ? (todoTasksArray = []) : todoTasksArray;
 
-renderTasks();
+let queueIndex = null;
 
-function addTask(e) {
+function addTodo(e) {
   e.preventDefault();
-
-  //   Get Input Value
-  var text = todoInput.value;
-
-  if (text != "") {
-    todoTasksArray.push(text);
+  const todoValue = todoInput.value;
+  if (todoValue != "") {
+    todoTasksArray.push(todoValue);
     todoInput.value = "";
-    renderTasks();
+    printTasks();
   }
 }
 
-function renderTasks() {
-  todoTasks.innerHTML = "";
-  todoTasksArray.forEach((task) => {
-    var todoTask = document.createElement("div");
-    todoTask.classList.add("todo_task");
-    todoTask.innerHTML = `<div class="arrow_buttons">
-                                    <button onclick="moveUp(${todoTasksArray.indexOf(
-                                      task
-                                    )})">
-                                        <i class="fa-solid fa-chevron-up"></i>
-                                    </button>
-                                    <button onclick="moveDown(${todoTasksArray.indexOf(
-                                      task
-                                    )})">
-                                        <i class="fa-solid fa-chevron-down"></i>
-                                    </button>
-                         </div>
-                        <span>${task}</span>
-                        <div class="buttons_group">
-                                    <button onclick="attemptDelete(${todoTasksArray.indexOf(
-                                      task
-                                    )})">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </button>
-                                    <button onclick="attemptEdit(${todoTasksArray.indexOf(
-                                      task
-                                    )})">
-                                        <i class="fa-regular fa-pen-to-square"></i>
-                                    </button>
-                        </div>`;
-    todoTasks.append(todoTask);
+function printTasks() {
+  updateLocalStorage();
+  todoTasksContainer.innerHTML = "";
+  todoTasksArray.forEach((todoTask) => {
+    const todoTaskDiv = document.createElement("div");
+    todoTaskDiv.classList.add("todo_task");
+    todoTaskDiv.innerHTML = `
+        <div class="move_buttons">
+            <button onclick="moveUp(${todoTasksArray.indexOf(todoTask)})">
+                <span class="material-symbols-outlined"> arrow_drop_up </span>
+            </button>
+            <button onclick="moveDown(${todoTasksArray.indexOf(todoTask)})">
+                <span class="material-symbols-outlined"> arrow_drop_down </span>
+            </button>
+        </div>
+        <div class="todo_text">${todoTask}</div>
+        <button class="edit_button" onclick="editTask(${todoTasksArray.indexOf(
+          todoTask
+        )})">
+            <span class="material-symbols-outlined"> edit </span>
+        </button>
+        <button class="delete_button" onclick="attemptDelete(${todoTasksArray.indexOf(
+          todoTask
+        )})">
+            <span class="material-symbols-outlined"> delete </span>
+        </button>
+        `;
+    todoTasksContainer.appendChild(todoTaskDiv);
   });
+
+  if (todoTasksArray.length >= todoTasksContainer.clientHeight / (43 + 20)) {
+    todoTasksContainer.style.overflowY = "scroll";
+  }
 }
 
 function moveUp(index) {
   if (index > 0) {
-    var currentText = todoTasksArray[index];
-    var previousText = todoTasksArray[index - 1];
-
-    todoTasksArray[index] = previousText;
-    todoTasksArray[index - 1] = currentText;
-
-    renderTasks();
+    let prevTask = todoTasksArray[index - 1];
+    let currTask = todoTasksArray[index];
+    todoTasksArray[index - 1] = currTask;
+    todoTasksArray[index] = prevTask;
+    printTasks();
   }
 }
 
 function moveDown(index) {
-  if (index <= todoTasksArray.length - 2) {
-    var currentText = todoTasksArray[index];
-    var nextText = todoTasksArray[index + 1];
-
-    todoTasksArray[index] = nextText;
-    todoTasksArray[index + 1] = currentText;
-
-    renderTasks();
+  if (index < todoTasksArray.length - 1) {
+    let nextTask = todoTasksArray[index + 1];
+    let currTask = todoTasksArray[index];
+    todoTasksArray[index + 1] = currTask;
+    todoTasksArray[index] = nextTask;
+    printTasks();
   }
 }
 
-function attemptDelete(index) {
-  deleteModal.style.display = "grid";
-  indexToBeDeleted = index;
+function editTask(index) {
+  queueIndex = index;
+  editInput.value = todoTasksArray[index];
+  modalContainer.classList.add("active");
+  editModal.classList.add("active");
 }
 
-function cancelDelete() {
-  deleteModal.style.display = "none";
+function updateTask(e) {
+  e.preventDefault();
+  todoTasksArray[queueIndex] = editInput.value;
+  modalContainer.classList.remove("active");
+  editModal.classList.remove("active");
+  printTasks();
+  queueIndex = null;
+}
+
+function attemptDelete(index) {
+  queueIndex = index;
+  modalContainer.classList.add("active");
+  deleteModal.classList.add("active");
 }
 
 function deleteTask() {
-  todoTasksArray.splice(indexToBeDeleted, 1);
-  deleteModal.style.display = "none";
-  renderTasks();
+  todoTasksArray.splice(queueIndex, 1);
+  modalContainer.classList.remove("active");
+  deleteModal.classList.remove("active");
+  queueIndex = null;
+  printTasks();
 }
 
-function attemptEdit(index) {
-  editModal.style.display = "grid";
-  editInput.value = todoTasksArray[index];
-  indexToBeEdited = index;
-}
-
-function cancelEdit(e) {
+function cancelOperation(e) {
   e.preventDefault();
-  editModal.style.display = "none";
+  modalContainer.classList.remove("active");
+  deleteModal.classList.remove("active");
+  editModal.classList.remove("active");
+  queueIndex = null;
 }
 
-function editTask(e) {
-  e.preventDefault();
-  var updatedText = editInput.value;
-  todoTasksArray[indexToBeEdited] = updatedText;
-  editModal.style.display = "none";
-  renderTasks();
+function updateLocalStorage() {
+  const stringifiedTasksArray = JSON.stringify(todoTasksArray);
+  localStorage.setItem("todo-tasks", stringifiedTasksArray);
 }
+
+printTasks();
