@@ -2,16 +2,25 @@
 
 :root {
   --white: #fff;
-  --theme-color: royalblue;
+  --theme-color: rgb(66, 69, 231);
   --primary: #1b1b1b;
   --secondary: rgb(244, 250, 255);
+  --bg: rgba(255, 255, 255, 1);
+}
+
+.dark {
+  --white: rgba(0, 0, 0, 0.8);
+  --theme-color: rgb(65, 81, 225);
+  --primary: rgba(255, 255, 255, 0.8);
+  --secondary: rgb(0, 0, 31);
+  --bg: rgba(255, 255, 255, 0.14);
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  transition: all 0.07s;
+  transition: all 0.1s;
 }
 
 ::-webkit-scrollbar {
@@ -35,6 +44,7 @@ body {
   font-family: "Poppins", sans-serif;
   user-select: none;
   overflow-x: hidden;
+  background: var(--secondary);
 }
 
 /* Variable styles */
@@ -44,14 +54,23 @@ body {
   margin: 0 auto;
 }
 
+input,
+textarea,
+button,
+select,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
 /* Header */
 #header {
-  background: var(--white);
+  background: var(--bg);
   min-height: 10vh;
   border-bottom: 2px solid var(--primary);
   display: grid;
   place-items: center;
   padding: 0px 10px;
+  position: relative;
 }
 
 #header .container h1 {
@@ -63,7 +82,7 @@ body {
 
 /* Main */
 #main {
-  height: 77vh;
+  min-height: 77vh;
   background: var(--secondary);
   padding: 0px 10px;
 }
@@ -90,7 +109,7 @@ body {
   padding: 5px;
   font-size: 1.125rem;
   color: var(--primary);
-  background: var(--white);
+  background: var(--bg);
   border: 2px solid var(--primary);
   border-radius: 5px;
   outline: none;
@@ -98,15 +117,16 @@ body {
 
 #todo_input_form button {
   height: 100%;
-  border: 3px solid var(--primary);
-  background: var(--primary);
-  color: var(--white);
+  border: 2px solid var(--primary);
+  background: var(--bg);
+  color: var(--primary);
   border-radius: 5px;
   cursor: pointer;
+  padding: 2px;
 }
 
 #todo_input_form button:hover {
-  color: cyan;
+  color: royalblue;
 }
 
 #todo_tasks_container {
@@ -192,7 +212,7 @@ body {
   padding: 5px 10px;
   font-size: 1.125rem;
   color: var(--primary);
-  background: var(--white);
+  background: var(--bg);
   border: 2px solid var(--primary);
   border-radius: 5px;
 }
@@ -204,15 +224,15 @@ body {
   width: 100%;
   height: 100%;
   z-index: 9999;
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(1px);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(2px);
   display: grid;
   place-items: center;
   padding: 10px;
   opacity: 0;
   pointer-events: none;
   transform: scale(0);
-  transition: 0.1s;
+  transition: 0.02s;
 }
 
 #modals_container.active {
@@ -225,7 +245,7 @@ body {
   width: 95%;
   max-width: 650px;
   padding: 60px 20px;
-  background: white;
+  background: rgba(255, 255, 255, 0.65);
   border: 2px solid var(--primary);
   border-radius: 10px;
   display: flex;
@@ -262,11 +282,13 @@ body {
 #edit_input_form input {
   font-size: 1.125rem;
   padding: 5px 8px;
-  background: var(--white);
+  background: white;
   border: 2px solid var(--primary);
   border-radius: 5px;
   width: 100%;
   max-width: 280px;
+  border: 2px solid #1b1b1b;
+  outline: none;
 }
 
 .buttons_group {
@@ -288,12 +310,12 @@ body {
 
 .buttons_group button:nth-child(1) {
   background: var(--theme-color);
-  color: var(--white);
+  color: white;
 }
 
 .buttons_group button:nth-child(2) {
   background: #ddd;
-  color: var(--primary);
+  color: #1b1b1b;
 }
 
 #edit_modal.active,
@@ -302,10 +324,25 @@ body {
   pointer-events: all;
 }
 
+#theme_toggler {
+  position: absolute;
+  top: 50%;
+  right: 0px;
+  transform: translateY(-50%);
+  width: 40px;
+  padding: 0px 0px 0px 3px;
+  background: var(--secondary);
+  border: 2px solid var(--primary);
+  border-right: none;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  color: var(--primary);
+}
+
 /* Footer */
 #footer {
   height: 13vh;
-  background: var(--white);
+  background: var(--bg);
   border-top: 2px solid var(--primary);
   display: grid;
   place-items: center;
@@ -322,6 +359,7 @@ body {
 #footer .container p a {
   color: var(--theme-color);
   text-decoration: none;
+  font-weight: 500;
 }
 
 /* Media Queries */
@@ -341,7 +379,7 @@ body {
   }
 
   #main {
-    height: 83vh;
+    min-height: 83vh;
   }
 
   #todo_tasks_container {

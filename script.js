@@ -4,6 +4,29 @@ const modalContainer = document.getElementById("modals_container");
 const editModal = document.getElementById("edit_modal");
 const deleteModal = document.getElementById("delete_modal");
 const editInput = document.getElementById("edit_input");
+const themeTogglerButton = document.getElementById("theme_toggler");
+
+// App Theme
+let theme = localStorage.getItem("theme");
+if (theme == null) {
+  theme = "dark";
+  localStorage.setItem("theme", theme);
+  document.body.classList.add(theme);
+} else {
+  document.body.classList.add(theme);
+}
+
+themeTogglerButton.addEventListener("click", () => {
+  document.body.classList.remove(theme);
+  theme = localStorage.getItem("theme");
+  if (theme == "light") {
+    theme = "dark";
+  } else if (theme == "dark") {
+    theme = "light";
+  }
+  document.body.classList.add(theme);
+  localStorage.setItem("theme", theme);
+});
 
 let todoTasksArray = JSON.parse(localStorage.getItem("todo-tasks"));
 
